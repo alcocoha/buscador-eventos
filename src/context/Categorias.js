@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { token, urlAPI } from '../constants';
 
 // Creamos el context
-
 const CategoriasContext = React.createContext();
+
+// Creamos el consumer
 export const CategoriasConsumer = CategoriasContext.Consumer;
 
 class Categorias extends Component {
-
-    token = '7LVXNVTWWBKXAPYBJBS7';
 
     state = { 
         categorias: []
     };
 
     handlerGetCategories = async() => {
-
-        const url = `https://www.eventbriteapi.com/v3/categories/`;
-
-        const categorias = await axios.get( url, { params: {token : this.token, locale : 'es_ES' }});
-        console.log('categorias', categorias)
+        const url = `${urlAPI}categories/`;
+        const categorias = await axios.get( url, { params: { token, locale : 'es_ES' }});
         this.setState({ categorias : categorias.data.categories });
     }
 
