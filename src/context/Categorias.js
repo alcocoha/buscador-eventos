@@ -19,8 +19,8 @@ class Categorias extends Component {
         const url = `https://www.eventbriteapi.com/v3/categories/`;
 
         const categorias = await axios.get( url, { params: {token : this.token, locale : 'es_ES' }});
-
         console.log('categorias', categorias)
+        this.setState({ categorias : categorias.data.categories });
     }
 
     componentDidMount(){
@@ -28,9 +28,10 @@ class Categorias extends Component {
     }
 
     render() {
+        console.log('this.state', this.state)
         return (
             <CategoriasContext.Provider
-                value={{ categorias : this.state.categorias}}
+                value={ this.state }
             >
                 { this.props.children }
             </CategoriasContext.Provider>
